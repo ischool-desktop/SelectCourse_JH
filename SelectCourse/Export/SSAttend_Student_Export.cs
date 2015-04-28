@@ -8,7 +8,7 @@ using FISCA.Presentation.Controls;
 using DevComponents.Editors;
 using System.Linq;
 
-namespace SelectCourse.Export
+namespace SelectCourse_JH.Export
 {
     public partial class SSAttend_Student_Export : EMBA.Export.ExportProxyForm
     {

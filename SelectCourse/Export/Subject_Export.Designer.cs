@@ -1,4 +1,4 @@
-﻿namespace SelectCourse.Export
+﻿namespace SelectCourse_JH.Export
 {
     partial class Subject_Export
     {

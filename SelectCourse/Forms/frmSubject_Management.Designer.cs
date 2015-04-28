@@ -1,4 +1,4 @@
-﻿namespace SelectCourse.Forms
+﻿namespace SelectCourse_JH.Forms
 {
     partial class frmSubject_Management
     {

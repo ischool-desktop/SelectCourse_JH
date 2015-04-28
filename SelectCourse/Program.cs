@@ -4,7 +4,7 @@ using FISCA.UDT;
 using FISCA.Presentation;
 using FISCA.Permission;
 
-namespace SelectCourse
+namespace SelectCourse_JH
 {
     public static class Program
     {

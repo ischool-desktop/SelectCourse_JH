@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using FISCA.Presentation.Controls;
 using FISCA.UDT;
 
-namespace SelectCourse.Forms
+namespace SelectCourse_JH.Forms
 {
     public partial class frmSubject_Management : BaseForm
     {

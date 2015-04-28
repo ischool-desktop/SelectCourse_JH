@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using FISCA.UDT;
 
-namespace SelectCourse.Event
+namespace SelectCourse_JH.Event
 {
     public class DeliverActiveRecordEventArgs : EventArgs
     {

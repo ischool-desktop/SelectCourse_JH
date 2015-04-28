@@ -8,7 +8,7 @@ using EMBA.Validator;
 using FISCA.Data;
 using FISCA.UDT;
 
-namespace SelectCourse.Import
+namespace SelectCourse_JH.Import
 {
     class Subject_Import : ImportWizard
     {
@@ -86,7 +86,7 @@ namespace SelectCourse.Import
 
         public override XDocument GetValidateRule()
         {
-            return XDocument.Parse(SelectCourse.Properties.Resources.Subject_Import);
+            return XDocument.Parse(Properties.Resources.Subject_Import);
         }
 
         public override ImportAction GetSupportActions()

@@ -10,7 +10,7 @@ using SHSchool.Data;
 using DevComponents.Editors;
 using FISCA.UDT;
 
-namespace SelectCourse.Forms
+namespace SelectCourse_JH.Forms
 {
     public partial class frmIdentityCreator : Form
     {

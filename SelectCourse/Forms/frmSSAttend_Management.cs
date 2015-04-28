@@ -12,7 +12,7 @@ using FISCA.UDT;
 using FISCA.Data;
 using System.Threading.Tasks;
 
-namespace SelectCourse.Forms
+namespace SelectCourse_JH.Forms
 {
     public partial class frmSSAttend_Management : BaseForm
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using FISCA.UDT;
 
-namespace SelectCourse.UDT
+namespace SelectCourse_JH.UDT
 {
     [FISCA.UDT.TableName("ischool.course_selection.si_relation")]
     public class SIRelation : ActiveRecord

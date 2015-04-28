@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using FISCA.UDT;
 
-namespace SelectCourse.Forms
+namespace SelectCourse_JH.Forms
 {
     public partial class frmSubjectCreator : Form
     {

@@ -9,7 +9,7 @@ using Aspose.Cells;
 using System.IO;
 using FISCA.UDT;
 
-namespace SelectCourse.Report
+namespace SelectCourse_JH.Report
 {
     class Subject_SSAttend
     {

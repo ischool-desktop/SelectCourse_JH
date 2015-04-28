@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using FISCA.Data;
 using System.Data;
 
-namespace SelectCourse.Forms
+namespace SelectCourse_JH.Forms
 {
     public partial class frmSelectableSubject_Management : BaseForm
     {

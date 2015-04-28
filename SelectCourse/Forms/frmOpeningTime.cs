@@ -10,7 +10,7 @@ using FISCA.Presentation.Controls;
 using FISCA.UDT;
 using DevComponents.DotNetBar.Controls;
 
-namespace SelectCourse.Forms
+namespace SelectCourse_JH.Forms
 {
     public partial class frmOpeningTime : BaseForm
     {

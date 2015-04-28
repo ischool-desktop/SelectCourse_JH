@@ -8,8 +8,8 @@
     <ProjectGuid>{76D87CB3-61BC-45C2-8528-C4984E0F9F6F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SelectCourse</RootNamespace>
-    <AssemblyName>SelectCourse</AssemblyName>
+    <RootNamespace>SelectCourse_JH</RootNamespace>
+    <AssemblyName>SelectCourse_JH</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

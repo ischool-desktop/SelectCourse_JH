@@ -5,7 +5,7 @@ using FISCA.UDT;
 using FISCA.Data;
 using System.Data;
 
-namespace SelectCourse.Export
+namespace SelectCourse_JH.Export
 {
     public partial class Subject_Export : EMBA.Export.ExportProxyForm
     {
