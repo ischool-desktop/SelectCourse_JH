@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{76D87CB3-61BC-45C2-8528-C4984E0F9F6F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SelectCourse</RootNamespace>
+    <AssemblyName>SelectCourse</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>Library\Aspose.Cells.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=9.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ischool source\ischool@debug\components\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
+    <Reference Include="EMBA.DocumentValidator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\EMBA.DocumentValidator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EMBA.Export, Version=2013.10.8.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\EMBA.Export.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EMBA.Import, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\EMBA.Import.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EMBA.Validator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\EMBA.Validator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA">
+      <HintPath>Library\FISCA.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.Authentication">
+      <HintPath>Library\FISCA.Authentication.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.Data">
+      <HintPath>Library\FISCA.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.DSAClient">
+      <HintPath>Library\FISCA.DSAClient.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.DSAUtil">
+      <HintPath>Library\FISCA.DSAUtil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.Permission">
+      <HintPath>Library\FISCA.Permission.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.Presentation">
+      <HintPath>Library\FISCA.Presentation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.UDT">
+      <HintPath>Library\FISCA.UDT.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="K12.Data">
+      <HintPath>Library\K12.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="K12.Presentation">
+      <HintPath>Library\K12.Presentation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SHSchool.Data">
+      <HintPath>Library\SHSchool.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Event\DeliverActiveRecord.cs" />
+    <Compile Include="Event\DeliverActiveRecordEvent.cs" />
+    <Compile Include="Export\SSAttend_NoneSelectStudent_Export.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Export\SSAttend_NoneSelectStudent_Export.Designer.cs">
+      <DependentUpon>SSAttend_NoneSelectStudent_Export.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Export\SSAttend_Student_Export.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Export\SSAttend_Student_Export.Designer.cs">
+      <DependentUpon>SSAttend_Student_Export.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Export\Subject_Export.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Export\Subject_Export.Designer.cs">
+      <DependentUpon>Subject_Export.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmIdentityCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmIdentityCreator.Designer.cs">
+      <DependentUpon>frmIdentityCreator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmOpeningTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmOpeningTime.Designer.cs">
+      <DependentUpon>frmOpeningTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSelectableSubject_Management.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSelectableSubject_Management.Designer.cs">
+      <DependentUpon>frmSelectableSubject_Management.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSSAttend_Management.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSSAttend_Management.Designer.cs">
+      <DependentUpon>frmSSAttend_Management.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSSAttend_Subject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSSAttend_Subject.Designer.cs">
+      <DependentUpon>frmSSAttend_Subject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSubjectCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSubjectCreator.Designer.cs">
+      <DependentUpon>frmSubjectCreator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSubject_Management.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSubject_Management.Designer.cs">
+      <DependentUpon>frmSubject_Management.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Import\Subject_Import.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Class_SSAttend.cs" />
+    <Compile Include="Report\Subject_SSAttend.cs" />
+    <Compile Include="UDT\Identity.cs" />
+    <Compile Include="UDT\OpeningTime.cs" />
+    <Compile Include="UDT\SIRelation.cs" />
+    <Compile Include="UDT\SSAttend.cs" />
+    <Compile Include="UDT\Subject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Export\SSAttend_NoneSelectStudent_Export.resx">
+      <DependentUpon>SSAttend_NoneSelectStudent_Export.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Export\SSAttend_Student_Export.resx">
+      <DependentUpon>SSAttend_Student_Export.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Export\Subject_Export.resx">
+      <DependentUpon>Subject_Export.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmIdentityCreator.resx">
+      <DependentUpon>frmIdentityCreator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmOpeningTime.resx">
+      <DependentUpon>frmOpeningTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSelectableSubject_Management.resx">
+      <DependentUpon>frmSelectableSubject_Management.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSSAttend_Management.resx">
+      <DependentUpon>frmSSAttend_Management.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSSAttend_Subject.resx">
+      <DependentUpon>frmSSAttend_Subject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSubjectCreator.resx">
+      <DependentUpon>frmSubjectCreator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSubject_Management.resx">
+      <DependentUpon>frmSubject_Management.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\network_lock_64.png" />
+    <None Include="Resources\學生選修科目清單樣版 .xls" />
+    <None Include="Resources\科目選修學生名單樣版.xls" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sandglass_unlock_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Export.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Import.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Import\Subject_Import.xml" />
+    <None Include="Resources\paste_64.png" />
+    <None Include="Resources\searchHistory.png" />
+    <None Include="Resources\format.xsl" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
