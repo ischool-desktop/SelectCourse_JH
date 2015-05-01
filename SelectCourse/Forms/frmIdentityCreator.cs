@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using SHSchool.Data;
 using DevComponents.Editors;
 using FISCA.UDT;
 
@@ -33,29 +32,10 @@ namespace SelectCourse_JH.Forms
 
         private void frmIdentityCreator_Load(object sender, EventArgs e)
         {
-            List<SHDepartmentRecord> records = SHDepartment.SelectAll();
-
-            ComboItem comboItem1 = new ComboItem("");
-            comboItem1.Tag = null;
-            this.cboDepart.Items.Add(comboItem1);
-            foreach (SHDepartmentRecord record in records)
-            {                
-                ComboItem item = new ComboItem(record.FullName);
-                item.Tag = record;
-                this.cboDepart.Items.Add(item);
-            }
-
-            this.cboDepart.SelectedItem = comboItem1;
             this.GradeYear.Focus();
 
             if (mRecord != null)
             {
-                SHDepartmentRecord record = records.Where(x=>x.ID == mRecord.DeptID.ToString()).ElementAt(0);
-                ComboItem item = new ComboItem(record.FullName);
-                item.Tag = record;
-                this.cboDepart.SelectedItem = record;
-                this.cboDepart.Text = record.FullName;
-
                 this.GradeYear.Text = mRecord.GradeYear.ToString();
             }
         }
@@ -84,12 +64,6 @@ namespace SelectCourse_JH.Forms
 
         private bool Is_Validated()
         {
-            ComboItem item = (ComboItem)this.cboDepart.SelectedItem;
-            SHDepartmentRecord dept = (SHDepartmentRecord)item.Tag;
-
-            if (dept == null)                
-                return false;
-
             int grade_year = 0;
             bool result = int.TryParse(this.GradeYear.Text, out grade_year);
 
@@ -99,7 +73,7 @@ namespace SelectCourse_JH.Forms
                 return false;
             }
 
-            List<UDT.Identity> records = Access.Select<UDT.Identity>(string.Format("ref_dept_id = {0} and grade_year = {1}", dept.ID, grade_year));
+            List<UDT.Identity> records = Access.Select<UDT.Identity>(string.Format("grade_year = {0}", grade_year));
 
             if (mRecord == null)
             {
@@ -117,15 +91,12 @@ namespace SelectCourse_JH.Forms
                     return false;
                 }
             }
- 
+
             return true;
         }
 
         private void SaveData()
         {
-            ComboItem item = (ComboItem)this.cboDepart.SelectedItem;
-            SHDepartmentRecord dept = (SHDepartmentRecord)item.Tag;
-
             int grade_year = 0;
             bool result = int.TryParse(this.GradeYear.Text, out grade_year);
 
@@ -136,7 +107,6 @@ namespace SelectCourse_JH.Forms
             else
                 record = mRecord;
 
-            record.DeptID = int.Parse(dept.ID);
             record.GradeYear = grade_year;
 
             record.Save();

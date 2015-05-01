@@ -64,9 +64,8 @@ namespace SelectCourse_JH.Export
         private void InitIdentity()
         {
             List<UDT.Identity> identity_Records = Access.Select<UDT.Identity>();
-            List<SHSchool.Data.SHDepartmentRecord> dept_Records = SHSchool.Data.SHDepartment.SelectAll();
 
-            if (identity_Records.Count == 0 || dept_Records.Count == 0)
+            if (identity_Records.Count == 0)
             {
                 return;
             }
@@ -80,13 +79,9 @@ namespace SelectCourse_JH.Export
             this.cboIdentity.Items.Add(comboItem2);
             foreach (UDT.Identity record in identity_Records)
             {
-                IEnumerable<SHSchool.Data.SHDepartmentRecord> filter_Dept_Records = dept_Records.Where(x => x.ID == record.DeptID.ToString());
-                if (filter_Dept_Records.Count() > 0)
-                {
-                    ComboItem item = new ComboItem(filter_Dept_Records.ElementAt(0).FullName + "-" + record.GradeYear + "年級");
-                    item.Tag = record;
-                    this.cboIdentity.Items.Add(item);
-                }
+                ComboItem item = new ComboItem(record.GradeYear + "年級");
+                item.Tag = record;
+                this.cboIdentity.Items.Add(item);
             }
 
             this.cboIdentity.SelectedItem = comboItem1;
@@ -111,7 +106,7 @@ namespace SelectCourse_JH.Export
             int grade_year = 0;
             int dept_id = 0;
             string querySQL = string.Empty;
-            
+
             ComboItem item = this.cboIdentity.SelectedItem as ComboItem;
             UDT.Identity record = (item == null ? null : item.Tag as UDT.Identity);
             if (record != null)

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FISCA.Presentation.Controls;
 using FISCA.UDT;
 using DevComponents.Editors;
-using SHSchool.Data;
 using System.Linq;
 using System.Windows.Forms;
 using FISCA.Data;
@@ -67,7 +66,7 @@ namespace SelectCourse_JH.Forms
             records.ToList().ForEach((x) =>
             {
                 UDT.Subject record = x as UDT.Subject;
-                if ((rows.Where(y => (y.Tag == null ? "" :  y.Tag.ToString()) == record.UID).Count() == 0))
+                if ((rows.Where(y => (y.Tag == null ? "" : y.Tag.ToString()) == record.UID).Count() == 0))
                 {
                     object[] rowData = new object[] { record.SubjectName, record.Level, "", "" };
 
@@ -113,36 +112,14 @@ namespace SelectCourse_JH.Forms
             List<UDT.Identity> records = Access.Select<UDT.Identity>();
             if (records.Count == 0)
                 return;
-            List<SHDepartmentRecord> allDepts = SHDepartment.SelectAll();
-            if (allDepts.Count == 0)
-                return;
-            List<SHDepartmentRecord> depts = new List<SHDepartmentRecord>();
-            allDepts.ForEach((x) =>
-            {
-                if (records.Select(y => y.DeptID.ToString()).Contains(x.ID))
-                    depts.Add(x);
-            });
-            if (depts.Count == 0)
-                return;
 
-            Dictionary<string, SHDepartmentRecord> dicDepts = new Dictionary<string, SHDepartmentRecord>();
-            depts.ForEach((x) =>
-            {
-                if (!dicDepts.ContainsKey(x.ID))
-                    dicDepts.Add(x.ID, x);
-            });
+            IEnumerable<UDT.Identity> filterRecords = records;
 
-            foreach (string dept_id in dicDepts.Keys)
+            foreach (UDT.Identity identity in filterRecords)
             {
-                IEnumerable<UDT.Identity> filterRecords = records.Where(x=>x.DeptID.ToString() == dept_id);
-                if (filterRecords.Count() == 0)
-                    continue;
-
-                foreach (UDT.Identity identity in filterRecords)
-                {
-                    this.lstIdentity.Items.Add(new { UID = identity.UID, Item = (dicDepts[dept_id].FullName + "-" + identity.GradeYear + "年級") });
-                }
+                this.lstIdentity.Items.Add(new { UID = identity.UID, Item = (identity.GradeYear + "年級") });
             }
+
         }
 
         private void Add_Click(object sender, EventArgs e)
@@ -170,7 +147,7 @@ namespace SelectCourse_JH.Forms
 
         private void cmdSelectSubjects_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.cboSchoolYear.Text) || string.IsNullOrEmpty(this.cboSemester.Text) || this.lblMessage.Tag ==null)
+            if (string.IsNullOrEmpty(this.cboSchoolYear.Text) || string.IsNullOrEmpty(this.cboSemester.Text) || this.lblMessage.Tag == null)
             {
                 MsgBox.Show("請先選擇「學年度」、「學期」、「選課身分」！");
                 return;
@@ -302,9 +279,9 @@ namespace SelectCourse_JH.Forms
             Dictionary<string, UDT.Subject> dicSubjects = new Dictionary<string, UDT.Subject>();
             if (subjects.Count == 0)
                 return;
-            
+
             dicSubjects = subjects.ToDictionary(x => x.UID);
-            
+
             foreach (UDT.SIRelation record in records)
             {
                 if (!dicSubjects.ContainsKey(record.SubjectID.ToString()))
@@ -436,10 +413,10 @@ namespace SelectCourse_JH.Forms
                 bool result = int.TryParse(dgvData.Rows[rowIndex].Cells["CountLimit"].Value + "", out limit);
                 if (!result)
                     return;
-                
+
                 if (!this.dicGroupCountLimits.ContainsKey(dgvData.Rows[rowIndex].Cells["Group"].Value + ""))
                     this.dicGroupCountLimits.Add(dgvData.Rows[rowIndex].Cells["Group"].Value + "", limit);
-                
+
                 this.dicGroupCountLimits[dgvData.Rows[rowIndex].Cells["Group"].Value + ""] = limit;
 
                 UpdateCountLimit();

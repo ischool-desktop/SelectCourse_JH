@@ -40,8 +40,8 @@ namespace SelectCourse_JH.Forms
             dicIdentities = new Dictionary<string, string>();
             dicSIRelations = new Dictionary<string, KeyValuePair<string, int>>();
             dicSelectCounts = new Dictionary<string, int>();
-            dicSSAttends = new Dictionary<string,UDT.SSAttend>();
-            
+            dicSSAttends = new Dictionary<string, UDT.SSAttend>();
+
             this.progress.Visible = true;
             this.progress.IsRunning = true;
             this.AddSSAttend.Enabled = false;
@@ -52,14 +52,14 @@ namespace SelectCourse_JH.Forms
 
                 DataTable dataTable = queryHelper.Select(query_string);
 
-                foreach(DataRow row in dataTable.Rows)
+                foreach (DataRow row in dataTable.Rows)
                 {
                     if (!this.dicStudents.ContainsKey(row["student_id"] + ""))
                         this.dicStudents.Add(row["student_id"] + "", new KeyValuePair<string, string>(row["dept_id"] + "", row["grade_year"] + ""));
                 }
 
                 List<UDT.Identity> Identities = Access.Select<UDT.Identity>();
-                Identities.ForEach((x) => 
+                Identities.ForEach((x) =>
                 {
                     if (!this.dicIdentities.ContainsKey(x.DeptID + "-" + x.GradeYear))
                         this.dicIdentities.Add(x.DeptID + "-" + x.GradeYear, x.UID);
@@ -90,7 +90,7 @@ namespace SelectCourse_JH.Forms
         }
 
         private void frmSSAttend_Management_Load(object sender, System.EventArgs e)
-        {            
+        {
             //InitSchoolYear();
             //InitSemester();
             InitIdentity();
@@ -130,9 +130,8 @@ namespace SelectCourse_JH.Forms
         private void InitIdentity()
         {
             List<UDT.Identity> identity_Records = Access.Select<UDT.Identity>();
-            List<SHSchool.Data.SHDepartmentRecord> dept_Records = SHSchool.Data.SHDepartment.SelectAll();
 
-            if (identity_Records.Count == 0 || dept_Records.Count == 0)
+            if (identity_Records.Count == 0)
             {
                 return;
             }
@@ -141,13 +140,9 @@ namespace SelectCourse_JH.Forms
             this.cboIdentity.Items.Add(comboItem1);
             foreach (UDT.Identity record in identity_Records)
             {
-                IEnumerable<SHSchool.Data.SHDepartmentRecord> filter_Dept_Records = dept_Records.Where(x => x.ID == record.DeptID.ToString());
-                if (filter_Dept_Records.Count() > 0)
-                {
-                    ComboItem item = new ComboItem(filter_Dept_Records.ElementAt(0).FullName + "-" + record.GradeYear + "年級");
-                    item.Tag = record;
-                    this.cboIdentity.Items.Add(item);
-                }
+                ComboItem item = new ComboItem(record.GradeYear + "年級");
+                item.Tag = record;
+                this.cboIdentity.Items.Add(item);
             }
 
             this.cboIdentity.SelectedItem = comboItem1;
@@ -194,8 +189,8 @@ namespace SelectCourse_JH.Forms
             foreach (UDT.SIRelation record in records)
             {
                 if (!dicSubjects.ContainsKey(record.SubjectID.ToString()))
-                    continue; 
-                
+                    continue;
+
                 string subject_name = dicSubjects[record.SubjectID.ToString()].SubjectName;
                 string subject_level = dicSubjects[record.SubjectID.ToString()].Level.HasValue ? RomanChar(dicSubjects[record.SubjectID.ToString()].Level.Value.ToString()) : string.Empty;
 
@@ -368,7 +363,7 @@ order by class_name, seat_no, student_number, student.name;", subject_id);
             ComboItem item = (ComboItem)this.cboSelectableSubject.SelectedItem;
 
             if (item.Tag == null)
-                return;            
+                return;
 
             int subject_id = int.Parse(item.Tag.ToString());
 
@@ -399,7 +394,7 @@ order by class_name, seat_no, student_number, student.name;", subject_id);
                 if (!this.dicSSAttends.ContainsKey(x.StudentID + "-" + x.SubjectID))
                     this.dicSSAttends.Add(x.StudentID + "-" + x.SubjectID, x);
             });
-            
+
             records.SaveAll();
             InitSSAttend(subject_id);
             InitNonSSAttend(subject_id);
@@ -424,7 +419,7 @@ order by class_name, seat_no, student_number, student.name;", subject_id);
 
                 List<UDT.SSAttend> filterRecords = records.Where(x => x.StudentID == student_id).ToList();
 
-                filterRecords.ForEach((x) => 
+                filterRecords.ForEach((x) =>
                 {
                     x.Deleted = true;
                     dRecords.Add(x);
@@ -462,7 +457,7 @@ order by class_name, seat_no, student_number, student.name;", subject_id);
             int limit_count = this.GetSIRelationCount(identity_uid, SubjectID.ToString());
             int select_count = 0;
             string group_x = this.GetSIRelationGroup(identity_uid, SubjectID.ToString());
-            foreach(UDT.SSAttend SSAttend in this.dicSSAttends.Values)
+            foreach (UDT.SSAttend SSAttend in this.dicSSAttends.Values)
             {
                 if (SSAttend.StudentID != StudentID)
                     continue;

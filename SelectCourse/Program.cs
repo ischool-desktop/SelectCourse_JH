@@ -8,7 +8,7 @@ namespace SelectCourse_JH
 {
     public static class Program
     {
-        [MainMethod("新民高中選課模組")]
+        [MainMethod("國中通用選課模組")]
         static public void Main()
         {
             #region 模組啟用先同步Schema
@@ -22,7 +22,7 @@ namespace SelectCourse_JH
             Manager.SyncSchema(new UDT.Subject());
 
             //ServerModule.AutoManaged("https://module.ischool.com.tw/module/4923/shinmin.tc.edu.tw/udm.xml");
-            ServerModule.AutoManaged("http://module.ischool.com.tw/module/140/Course_Selection/udm.xml");
+            //ServerModule.AutoManaged("http://module.ischool.com.tw/module/140/Course_Selection/udm.xml");
             #endregion
 
             #region 教務作業/設定與管理

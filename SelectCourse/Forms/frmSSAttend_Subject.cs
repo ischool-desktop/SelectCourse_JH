@@ -68,9 +68,8 @@ namespace SelectCourse_JH.Forms
         private void InitIdentity()
         {
             List<UDT.Identity> identity_Records = Access.Select<UDT.Identity>();
-            List<SHSchool.Data.SHDepartmentRecord> dept_Records = SHSchool.Data.SHDepartment.SelectAll();
 
-            if (identity_Records.Count == 0 || dept_Records.Count == 0)
+            if (identity_Records.Count == 0)
             {
                 return;
             }
@@ -84,13 +83,9 @@ namespace SelectCourse_JH.Forms
             this.cboIdentity.Items.Add(comboItem2);
             foreach (UDT.Identity record in identity_Records)
             {
-                IEnumerable<SHSchool.Data.SHDepartmentRecord> filter_Dept_Records = dept_Records.Where(x => x.ID == record.DeptID.ToString());
-                if (filter_Dept_Records.Count() > 0)
-                {
-                    ComboItem item = new ComboItem(filter_Dept_Records.ElementAt(0).FullName + "-" + record.GradeYear + "年級");
-                    item.Tag = record;
-                    this.cboIdentity.Items.Add(item);
-                }
+                ComboItem item = new ComboItem(record.GradeYear + "年級");
+                item.Tag = record;
+                this.cboIdentity.Items.Add(item);
             }
 
             this.cboIdentity.SelectedItem = comboItem1;
@@ -169,7 +164,7 @@ order by subject.subject_name, subject.level, class_name, seat_no, student_numbe
             this.dgvData.Rows.Clear();
 
             if (string.IsNullOrEmpty(this.lblSchoolYear.Text) || string.IsNullOrEmpty(this.lblSemester.Text) || string.IsNullOrEmpty(cboIdentity.Text))
-                return;            
+                return;
 
             ComboItem item = (ComboItem)this.cboIdentity.SelectedItem;
 
@@ -296,7 +291,7 @@ order by class_name, seat_no, student_number, student.name;", this.lblSchoolYear
 
         private void chkSelectNoneStudent_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void chkSelectNoneStudent_CheckedChanged(object sender, EventArgs e)

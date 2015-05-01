@@ -31,11 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
-            this.cboDepart = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.Cancel = new DevComponents.DotNetBar.ButtonX();
             this.Save = new DevComponents.DotNetBar.ButtonX();
             this.GradeYear = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -46,11 +44,9 @@
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.panelEx1.Controls.Add(this.labelX2);
-            this.panelEx1.Controls.Add(this.cboDepart);
             this.panelEx1.Controls.Add(this.Cancel);
             this.panelEx1.Controls.Add(this.Save);
             this.panelEx1.Controls.Add(this.GradeYear);
-            this.panelEx1.Controls.Add(this.labelX1);
             this.panelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEx1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.panelEx1.Location = new System.Drawing.Point(0, 0);
@@ -73,23 +69,11 @@
             // 
             this.labelX2.BackgroundStyle.Class = "";
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(12, 46);
+            this.labelX2.Location = new System.Drawing.Point(14, 30);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(47, 21);
             this.labelX2.TabIndex = 0;
             this.labelX2.Text = "年級：";
-            // 
-            // cboDepart
-            // 
-            this.cboDepart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboDepart.DisplayMember = "Text";
-            this.cboDepart.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.cboDepart.FormattingEnabled = true;
-            this.cboDepart.Location = new System.Drawing.Point(61, 12);
-            this.cboDepart.Name = "cboDepart";
-            this.cboDepart.Size = new System.Drawing.Size(284, 25);
-            this.cboDepart.TabIndex = 1;
             // 
             // Cancel
             // 
@@ -117,31 +101,17 @@
             // 
             // GradeYear
             // 
-            this.GradeYear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.GradeYear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
             this.GradeYear.Border.Class = "TextBoxBorder";
             this.GradeYear.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.GradeYear.Location = new System.Drawing.Point(61, 46);
+            this.GradeYear.Location = new System.Drawing.Point(63, 30);
             this.GradeYear.Name = "GradeYear";
             this.GradeYear.Size = new System.Drawing.Size(284, 25);
             this.GradeYear.TabIndex = 1;
-            // 
-            // labelX1
-            // 
-            this.labelX1.AutoSize = true;
-            // 
-            // 
-            // 
-            this.labelX1.BackgroundStyle.Class = "";
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Location = new System.Drawing.Point(12, 12);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(47, 21);
-            this.labelX1.TabIndex = 0;
-            this.labelX1.Text = "科別：";
             // 
             // errorProvider1
             // 
@@ -170,8 +140,6 @@
         private DevComponents.DotNetBar.ButtonX Cancel;
         private DevComponents.DotNetBar.ButtonX Save;
         private DevComponents.DotNetBar.Controls.TextBoxX GradeYear;
-        private DevComponents.DotNetBar.LabelX labelX1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cboDepart;
     }
 }
