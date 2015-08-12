@@ -22,7 +22,7 @@ namespace SelectCourse_JH.Forms
         private int DefaultSemester;
         private int CurrentSchoolYear;
         private int CurrentSemester;
-        private Dictionary<string, KeyValuePair<string, string>> dicStudents;
+        private Dictionary<string, string> dicStudents;
         private Dictionary<string, string> dicIdentities;
         private Dictionary<string, KeyValuePair<string, int>> dicSIRelations;
         private Dictionary<string, int> dicSelectCounts;
@@ -36,7 +36,7 @@ namespace SelectCourse_JH.Forms
             Access = new AccessHelper();
             queryHelper = new QueryHelper();
 
-            dicStudents = new Dictionary<string, KeyValuePair<string, string>>();
+            dicStudents = new Dictionary<string, string>();
             dicIdentities = new Dictionary<string, string>();
             dicSIRelations = new Dictionary<string, KeyValuePair<string, int>>();
             dicSelectCounts = new Dictionary<string, int>();
@@ -48,21 +48,26 @@ namespace SelectCourse_JH.Forms
 
             Task task = Task.Factory.StartNew(() =>
             {
-                string query_string = "select student.id as student_id, case when student.ref_dept_id is NULL then class.ref_dept_id else student.ref_dept_id end as dept_id, class.grade_year from student join class on class.id=student.ref_class_id where class.status=1 and student.status in (1, 2)";
+                StringBuilder sb = new StringBuilder();
+                sb.Append("select student.id as student_id, ");
+                //如果學生身上的科別代碼為空,就找班級上的科別代碼
+                //sb.Append("case when student.ref_dept_id is NULL then class.ref_dept_id else student.ref_dept_id end as dept_id, ");
+                sb.Append("class.grade_year from student join class on class.id=student.ref_class_id ");
+                sb.Append("where class.status=1 and student.status in (1, 2)");
 
-                DataTable dataTable = queryHelper.Select(query_string);
+                DataTable dataTable = queryHelper.Select(sb.ToString());
 
                 foreach (DataRow row in dataTable.Rows)
                 {
                     if (!this.dicStudents.ContainsKey(row["student_id"] + ""))
-                        this.dicStudents.Add(row["student_id"] + "", new KeyValuePair<string, string>(row["dept_id"] + "", row["grade_year"] + ""));
+                        this.dicStudents.Add(row["student_id"] + "", row["grade_year"] + "");
                 }
 
                 List<UDT.Identity> Identities = Access.Select<UDT.Identity>();
                 Identities.ForEach((x) =>
                 {
-                    if (!this.dicIdentities.ContainsKey(x.DeptID + "-" + x.GradeYear))
-                        this.dicIdentities.Add(x.DeptID + "-" + x.GradeYear, x.UID);
+                    if (!this.dicIdentities.ContainsKey("" + x.GradeYear))
+                        this.dicIdentities.Add("" + x.GradeYear, x.UID);
                 });
 
                 List<UDT.SIRelation> SIRelations = Access.Select<UDT.SIRelation>();
@@ -277,7 +282,6 @@ namespace SelectCourse_JH.Forms
 
             ComboItem item = (ComboItem)this.cboIdentity.SelectedItem;
             UDT.Identity identity_Record = item.Tag as UDT.Identity;
-            int dept_id = identity_Record.DeptID;
             int grade_year = identity_Record.GradeYear;
             grade_year -= (this.CurrentSchoolYear - this.DefaultSchoolYear);
             string SQL = string.Format(@"select class_name, seat_no, student_number, student.name, Student.id as student_id from $ischool.course_selection.ss_attend as sa 
@@ -313,25 +317,23 @@ order by class_name, seat_no, student_number, student.name;", this.lblSchoolYear
 
             ComboItem item = (ComboItem)this.cboIdentity.SelectedItem;
             UDT.Identity identity_Record = item.Tag as UDT.Identity;
-            int dept_id = identity_Record.DeptID;
             int grade_year = identity_Record.GradeYear;
             grade_year -= (this.CurrentSchoolYear - this.DefaultSchoolYear);
 
-            string SQL = string.Format(@"select class_name, seat_no, student_number, student.name, student.ref_dept_id as student_dept_id, class.ref_dept_id as class_dept_id, class.grade_year, student.id as student_id from student
-left join class on class.id=student.ref_class_id 
-where student.status in (1, 2) and class.status=1 and student.id not in 
-(
-select sa.ref_student_id from $ischool.course_selection.ss_attend as sa 
-join $ischool.course_selection.subject as subject on subject.uid=sa.ref_subject_id
-where subject.uid = {0}
-)
-order by class_name, seat_no, student_number, student.name;", subject_id);
+            StringBuilder sb = new StringBuilder();
+            sb.Append("select class_name, seat_no, student_number, student.name, class.grade_year, student.id as student_id ");
+            sb.Append("from student left join class on class.id=student.ref_class_id ");
+            sb.Append("where student.status in (1, 2) and class.status=1 ");
+            sb.Append("and student.id not in "); //學生不在...以下條件
+            sb.Append("(select sa.ref_student_id from $ischool.course_selection.ss_attend as sa ");
+            sb.Append("join $ischool.course_selection.subject as subject on subject.uid=sa.ref_subject_id ");
+            sb.Append(string.Format("where subject.uid = {0}) ", subject_id));
+            sb.Append("order by class_name, seat_no, student_number, student.name");
 
-            DataTable dataTable = queryHelper.Select(SQL);
+            DataTable dataTable = queryHelper.Select(sb.ToString());
             foreach (DataRow row in dataTable.Rows)
             {
-                string selected_dept_id = !string.IsNullOrEmpty(row["student_dept_id"] + "") ? (row["student_dept_id"] + "") : (row["class_dept_id"] + "");
-                if ((selected_dept_id != dept_id.ToString()) || (row["grade_year"] + "" != grade_year.ToString()))
+                if (row["grade_year"] + "" != grade_year.ToString())
                     continue;
 
                 object[] rowData = new object[] { row["class_name"] + "", row["seat_no"] + "", row["student_number"] + "", row["name"] + "" };
@@ -436,21 +438,19 @@ order by class_name, seat_no, student_number, student.name;", subject_id);
         {
             bool over = false;
 
-            string dept_id = "";
             string grade_year = "";
 
             if (this.dicStudents.ContainsKey(StudentID.ToString()))
             {
-                dept_id = this.dicStudents[StudentID.ToString()].Key;
-                grade_year = this.dicStudents[StudentID.ToString()].Value;
+                grade_year = this.dicStudents[StudentID.ToString()];
             }
             else
                 return over;
 
             string identity_uid = "";
 
-            if (this.dicIdentities.ContainsKey(dept_id + "-" + grade_year))
-                identity_uid = this.dicIdentities[dept_id + "-" + grade_year];
+            if (this.dicIdentities.ContainsKey(grade_year))
+                identity_uid = this.dicIdentities[grade_year];
             else
                 return over;
 

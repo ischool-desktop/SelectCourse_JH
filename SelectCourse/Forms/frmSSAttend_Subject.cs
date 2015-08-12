@@ -136,6 +136,7 @@ namespace SelectCourse_JH.Forms
                 InitNonSSAttend();
         }
 
+        //查詢選課學生(所有學生)
         private void InitSSAttend_AllStudent()
         {
             this.dgvData.Rows.Clear();
@@ -143,7 +144,7 @@ namespace SelectCourse_JH.Forms
             if (string.IsNullOrEmpty(this.lblSchoolYear.Text) || string.IsNullOrEmpty(this.lblSemester.Text) || string.IsNullOrEmpty(cboIdentity.Text))
                 return;
 
-            string SQL = string.Format(@"select subject.subject_name, subject.level, subject.credit, subject.type, class_name, seat_no, student_number, student.name, student.ref_dept_id as student_dept_id, class.ref_dept_id as class_dept_id, class.grade_year from $ischool.course_selection.ss_attend as sa 
+            string SQL = string.Format(@"select subject.subject_name, subject.level, subject.credit, subject.type, class_name, seat_no, student_number, student.name, class.grade_year from $ischool.course_selection.ss_attend as sa 
 join $ischool.course_selection.subject as subject on sa.ref_subject_id=subject.uid
 join student on student.id=sa.ref_student_id
 left join class on class.id=student.ref_class_id
@@ -159,6 +160,7 @@ order by subject.subject_name, subject.level, class_name, seat_no, student_numbe
             }
         }
 
+        //查詢選課學生
         private void InitSSAttend()
         {
             this.dgvData.Rows.Clear();
@@ -175,10 +177,9 @@ order by subject.subject_name, subject.level, class_name, seat_no, student_numbe
             }
 
             UDT.Identity identity_Record = item.Tag as UDT.Identity;
-            int dept_id = identity_Record.DeptID;
             int grade_year = identity_Record.GradeYear;
             grade_year -= (this.CurrentSchoolYear - this.DefaultSchoolYear);
-            string SQL = string.Format(@"select subject.subject_name, subject.level, subject.credit, subject.type, class_name, seat_no, student_number, student.name, student.ref_dept_id as student_dept_id, class.ref_dept_id as class_dept_id, class.grade_year from $ischool.course_selection.ss_attend as sa 
+            string SQL = string.Format(@"select subject.subject_name, subject.level, subject.credit, subject.type, class_name, seat_no, student_number, student.name, class.grade_year from $ischool.course_selection.ss_attend as sa 
 join $ischool.course_selection.subject as subject on sa.ref_subject_id=subject.uid
 join student on student.id=sa.ref_student_id
 left join class on class.id=student.ref_class_id
@@ -188,8 +189,7 @@ order by subject.subject_name, subject.level, class_name, seat_no, student_numbe
             DataTable dataTable = queryHelper.Select(SQL);
             foreach (DataRow row in dataTable.Rows)
             {
-                string selected_dept_id = !string.IsNullOrEmpty(row["student_dept_id"] + "") ? (row["student_dept_id"] + "") : (row["class_dept_id"] + "");
-                if ((selected_dept_id != dept_id.ToString()) || (row["grade_year"] + "" != grade_year.ToString()))
+                if ((row["grade_year"] + "" != grade_year.ToString()))
                     continue;
 
                 object[] rowData = new object[] { row["subject_name"] + "", row["level"] + "", row["credit"] + "", row["type"] + "", row["class_name"] + "", row["seat_no"] + "", row["student_number"] + "", row["name"] + "" };
@@ -198,6 +198,7 @@ order by subject.subject_name, subject.level, class_name, seat_no, student_numbe
             }
         }
 
+        //查詢未選課學生(所有學生)
         private void InitNonSSAttend_AllStudent()
         {
             this.dgvData.Rows.Clear();
@@ -210,9 +211,9 @@ order by subject.subject_name, subject.level, class_name, seat_no, student_numbe
 
             var qry = from cfr in identities
                       join cfmtr in sirelations on int.Parse(cfr.UID) equals cfmtr.IdentityID
-                      select new { DeptID = cfr.DeptID, GradeYear = cfr.GradeYear };
+                      select new { GradeYear = cfr.GradeYear };
 
-            string SQL = string.Format(@"select class_name, seat_no, student_number, student.name, student.ref_dept_id as student_dept_id, class.ref_dept_id as class_dept_id, class.grade_year from student
+            string SQL = string.Format(@"select class_name, seat_no, student_number, student.name, class.grade_year from student
 left join class on class.id=student.ref_class_id 
 where student.status in (1, 2) and class.status=1 and student.id not in 
 (
@@ -225,9 +226,7 @@ order by class_name, seat_no, student_number, student.name;", this.lblSchoolYear
             DataTable dataTable = queryHelper.Select(SQL);
             foreach (DataRow row in dataTable.Rows)
             {
-                string selected_dept_id = !string.IsNullOrEmpty(row["student_dept_id"] + "") ? (row["student_dept_id"] + "") : (row["class_dept_id"] + "");
-
-                if (qry.Where(x => x.DeptID.ToString() == selected_dept_id).Where(x => (x.GradeYear - (this.CurrentSchoolYear - this.DefaultSchoolYear)).ToString() == (row["grade_year"] + "")).Count() == 0)
+                if (qry.Where(x => (x.GradeYear - (this.CurrentSchoolYear - this.DefaultSchoolYear)).ToString() == (row["grade_year"] + "")).Count() == 0)
                     continue;
 
                 object[] rowData = new object[] { "", "", "", "", row["class_name"] + "", row["seat_no"] + "", row["student_number"] + "", row["name"] + "" };
@@ -236,6 +235,7 @@ order by class_name, seat_no, student_number, student.name;", this.lblSchoolYear
             }
         }
 
+        //查詢未選課學生
         private void InitNonSSAttend()
         {
             this.dgvData.Rows.Clear();
@@ -256,14 +256,13 @@ order by class_name, seat_no, student_number, student.name;", this.lblSchoolYear
 
             var qry = from cfr in identities
                       join cfmtr in sirelations on int.Parse(cfr.UID) equals cfmtr.IdentityID
-                      select new { DeptID = cfr.DeptID, GradeYear = cfr.GradeYear };
+                      select new { GradeYear = cfr.GradeYear };
 
             UDT.Identity identity_Record = item.Tag as UDT.Identity;
-            int dept_id = identity_Record.DeptID;
             int grade_year = identity_Record.GradeYear;
             grade_year -= (this.CurrentSchoolYear - this.DefaultSchoolYear);
 
-            string SQL = string.Format(@"select class_name, seat_no, student_number, student.name, student.ref_dept_id as student_dept_id, class.ref_dept_id as class_dept_id, class.grade_year from student
+            string SQL = string.Format(@"select class_name, seat_no, student_number, student.name, class.grade_year from student
 left join class on class.id=student.ref_class_id 
 where student.status in (1, 2) and class.status=1 and student.id not in 
 (
@@ -276,11 +275,10 @@ order by class_name, seat_no, student_number, student.name;", this.lblSchoolYear
             DataTable dataTable = queryHelper.Select(SQL);
             foreach (DataRow row in dataTable.Rows)
             {
-                string selected_dept_id = !string.IsNullOrEmpty(row["student_dept_id"] + "") ? (row["student_dept_id"] + "") : (row["class_dept_id"] + "");
-                if ((selected_dept_id != dept_id.ToString()) || (row["grade_year"] + "" != grade_year.ToString()))
+                if ((row["grade_year"] + "" != grade_year.ToString()))
                     continue;
 
-                if (qry.Where(x => x.DeptID.ToString() == selected_dept_id).Where(x => (x.GradeYear - (this.CurrentSchoolYear - this.DefaultSchoolYear)).ToString() == (row["grade_year"] + "")).Count() == 0)
+                if (qry.Where(x => (x.GradeYear - (this.CurrentSchoolYear - this.DefaultSchoolYear)).ToString() == (row["grade_year"] + "")).Count() == 0)
                     continue;
 
                 object[] rowData = new object[] { "", "", "", "", row["class_name"] + "", row["seat_no"] + "", row["student_number"] + "", row["name"] + "" };
@@ -306,5 +304,33 @@ order by class_name, seat_no, student_number, student.name;", this.lblSchoolYear
         {
             this.Close();
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            if (chkSelectNoneStudent.Checked)
+            {
+                saveFileDialog1.FileName = string.Format("匯出查詢未選課學生({0})", cboIdentity.SelectedItem.ToString());
+            }
+            else
+            {
+                saveFileDialog1.FileName = string.Format("匯出查詢已選課學生({0})", cboIdentity.SelectedItem.ToString());
+            }
+
+            saveFileDialog1.Filter = "Excel (*.xls)|*.xls";
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK) return;
+
+            DataGridViewExport export = new DataGridViewExport(dgvData);
+            export.Save(saveFileDialog1.FileName);
+
+            if (new CompleteForm().ShowDialog() == DialogResult.Yes)
+                System.Diagnostics.Process.Start(saveFileDialog1.FileName);
+
+
+
+
+
+        }
+
     }
 }

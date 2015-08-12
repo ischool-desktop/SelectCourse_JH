@@ -122,6 +122,11 @@ namespace SelectCourse_JH.Forms
 
         }
 
+        /// <summary>
+        /// 新增可選課身份
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Add_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Form frm = new frmIdentityCreator(string.Empty);
@@ -131,6 +136,9 @@ namespace SelectCourse_JH.Forms
                 this.InitIdentity();
         }
 
+        /// <summary>
+        /// 修改可選課身份
+        /// </summary>
         private void Update_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.ListBox lstBox = this.lstIdentity;

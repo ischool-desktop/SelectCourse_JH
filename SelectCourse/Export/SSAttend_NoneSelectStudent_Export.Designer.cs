@@ -30,7 +30,16 @@
         {
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.cboIdentity = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.SuspendLayout();
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(298, 317);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(383, 317);
             // 
             // chkSelectAll
             // 
@@ -39,6 +48,7 @@
             // 
             this.chkSelectAll.BackgroundStyle.Class = "";
             this.chkSelectAll.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkSelectAll.Location = new System.Drawing.Point(34, 293);
             // 
             // lblExplanation
             // 
@@ -48,6 +58,10 @@
             this.lblExplanation.BackgroundStyle.Class = "";
             this.lblExplanation.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblExplanation.Size = new System.Drawing.Size(101, 21);
+            // 
+            // FieldContainer
+            // 
+            this.FieldContainer.Size = new System.Drawing.Size(424, 232);
             // 
             // labelX2
             // 
@@ -77,11 +91,27 @@
             this.cboIdentity.TabIndex = 78;
             this.cboIdentity.SelectedIndexChanged += new System.EventHandler(this.cboIdentity_SelectedIndexChanged);
             // 
+            // labelX1
+            // 
+            this.labelX1.AutoSize = true;
+            this.labelX1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.Class = "";
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.Location = new System.Drawing.Point(34, 319);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(230, 21);
+            this.labelX1.TabIndex = 79;
+            this.labelX1.Text = "[未選課]表示於該年級未選擇任意科目";
+            // 
             // SSAttend_NoneSelectStudent_Export
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(492, 366);
+            this.ClientSize = new System.Drawing.Size(492, 350);
+            this.Controls.Add(this.labelX1);
             this.Controls.Add(this.labelX2);
             this.Controls.Add(this.cboIdentity);
             this.DoubleBuffered = true;
@@ -94,6 +124,7 @@
             this.Controls.SetChildIndex(this.lblExplanation, 0);
             this.Controls.SetChildIndex(this.cboIdentity, 0);
             this.Controls.SetChildIndex(this.labelX2, 0);
+            this.Controls.SetChildIndex(this.labelX1, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,6 +134,7 @@
 
         private DevComponents.DotNetBar.LabelX labelX2;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboIdentity;
+        private DevComponents.DotNetBar.LabelX labelX1;
 
 
     }

@@ -32,7 +32,6 @@
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.Exit = new DevComponents.DotNetBar.ButtonX();
-            this.Export = new DevComponents.DotNetBar.ButtonX();
             this.dgvData = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.SubjectName = new DevComponents.DotNetBar.Controls.DataGridViewLabelXColumn();
             this.Level = new DevComponents.DotNetBar.Controls.DataGridViewLabelXColumn();
@@ -47,6 +46,7 @@
             this.chkSelectNoneStudent = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.lblSchoolYear = new DevComponents.DotNetBar.LabelX();
             this.lblSemester = new DevComponents.DotNetBar.LabelX();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,36 +86,22 @@
             this.Exit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Exit.BackColor = System.Drawing.Color.Transparent;
             this.Exit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.Exit.Location = new System.Drawing.Point(692, 518);
+            this.Exit.Location = new System.Drawing.Point(615, 410);
             this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(72, 28);
+            this.Exit.Size = new System.Drawing.Size(75, 25);
             this.Exit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.Exit.TabIndex = 37;
             this.Exit.Text = "離  開";
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
-            // 
-            // Export
-            // 
-            this.Export.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.Export.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Export.BackColor = System.Drawing.Color.Transparent;
-            this.Export.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.Export.Location = new System.Drawing.Point(595, 518);
-            this.Export.Name = "Export";
-            this.Export.Size = new System.Drawing.Size(72, 28);
-            this.Export.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.Export.TabIndex = 38;
-            this.Export.Text = "匯  出";
-            this.Export.Visible = false;
             // 
             // dgvData
             // 
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.AllowUserToOrderColumns = true;
-            this.dgvData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvData.BackgroundColor = System.Drawing.Color.White;
             this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SubjectName,
@@ -141,7 +127,7 @@
             this.dgvData.ReadOnly = true;
             this.dgvData.RowTemplate.Height = 24;
             this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvData.Size = new System.Drawing.Size(743, 443);
+            this.dgvData.Size = new System.Drawing.Size(669, 344);
             this.dgvData.TabIndex = 36;
             // 
             // SubjectName
@@ -239,30 +225,32 @@
             // 
             // cboIdentity
             // 
-            this.cboIdentity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboIdentity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cboIdentity.DisplayMember = "Text";
             this.cboIdentity.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cboIdentity.FormattingEnabled = true;
             this.cboIdentity.ItemHeight = 19;
             this.cboIdentity.Location = new System.Drawing.Point(335, 16);
             this.cboIdentity.Name = "cboIdentity";
-            this.cboIdentity.Size = new System.Drawing.Size(277, 25);
+            this.cboIdentity.Size = new System.Drawing.Size(211, 25);
             this.cboIdentity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboIdentity.TabIndex = 44;
             this.cboIdentity.SelectedIndexChanged += new System.EventHandler(this.cboIdentity_SelectedIndexChanged);
             // 
             // chkSelectNoneStudent
             // 
+            this.chkSelectNoneStudent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSelectNoneStudent.AutoSize = true;
             this.chkSelectNoneStudent.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.chkSelectNoneStudent.BackgroundStyle.Class = "";
             this.chkSelectNoneStudent.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkSelectNoneStudent.Location = new System.Drawing.Point(632, 17);
+            this.chkSelectNoneStudent.Location = new System.Drawing.Point(569, 20);
             this.chkSelectNoneStudent.Name = "chkSelectNoneStudent";
-            this.chkSelectNoneStudent.Size = new System.Drawing.Size(132, 23);
+            this.chkSelectNoneStudent.Size = new System.Drawing.Size(121, 21);
             this.chkSelectNoneStudent.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkSelectNoneStudent.TabIndex = 45;
             this.chkSelectNoneStudent.Text = "查詢未選課學生";
@@ -299,11 +287,24 @@
             this.lblSemester.Size = new System.Drawing.Size(49, 23);
             this.lblSemester.TabIndex = 47;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.linkLabel1.Location = new System.Drawing.Point(23, 414);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(34, 17);
+            this.linkLabel1.TabIndex = 48;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "匯出";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // frmSSAttend_Subject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.ClientSize = new System.Drawing.Size(710, 444);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.lblSemester);
             this.Controls.Add(this.lblSchoolYear);
             this.Controls.Add(this.chkSelectNoneStudent);
@@ -312,7 +313,6 @@
             this.Controls.Add(this.labelX3);
             this.Controls.Add(this.labelX1);
             this.Controls.Add(this.Exit);
-            this.Controls.Add(this.Export);
             this.Controls.Add(this.dgvData);
             this.DoubleBuffered = true;
             this.Name = "frmSSAttend_Subject";
@@ -328,7 +328,6 @@
         private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.ButtonX Exit;
-        private DevComponents.DotNetBar.ButtonX Export;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvData;
         private DevComponents.DotNetBar.LabelX labelX2;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboIdentity;
@@ -343,5 +342,6 @@
         private DevComponents.DotNetBar.Controls.DataGridViewLabelXColumn StudentName;
         private DevComponents.DotNetBar.LabelX lblSchoolYear;
         private DevComponents.DotNetBar.LabelX lblSemester;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

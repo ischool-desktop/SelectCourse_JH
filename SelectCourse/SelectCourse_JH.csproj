@@ -114,6 +114,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompleteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompleteForm.designer.cs">
+      <DependentUpon>CompleteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataGridViewExport.cs" />
     <Compile Include="Event\DeliverActiveRecord.cs" />
     <Compile Include="Event\DeliverActiveRecordEvent.cs" />
     <Compile Include="Export\SSAttend_NoneSelectStudent_Export.cs">
@@ -194,6 +201,9 @@
     <Compile Include="UDT\Subject.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CompleteForm.resx">
+      <DependentUpon>CompleteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Export\SSAttend_NoneSelectStudent_Export.resx">
       <DependentUpon>SSAttend_NoneSelectStudent_Export.cs</DependentUpon>
     </EmbeddedResource>
